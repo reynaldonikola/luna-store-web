@@ -1,0 +1,8 @@
+# Material fuente privado o no utilizado por el sitio público
+assets/instagram/
+assets/logo/*.pdf
+assets/logo/*.ai
+BRIEF.md
+
+# Archivos del sistema
+.DS_Store
