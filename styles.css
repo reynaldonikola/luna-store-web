@@ -634,6 +634,12 @@ select:focus-visible {
   border-radius: var(--radius-lg);
   padding: 32px 24px 24px;
   box-shadow: var(--shadow-soft);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
 }
 
 .step-number {
@@ -653,9 +659,26 @@ select:focus-visible {
   box-shadow: var(--shadow-soft);
 }
 
+.step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--color-navy);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 16px;
+}
+
+.step-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
 .step-card h3 {
   font-size: 1.1rem;
-  margin: 12px 0 8px;
+  margin: 0 0 8px;
 }
 
 .step-card p {
@@ -663,6 +686,46 @@ select:focus-visible {
   color: #5a6771;
   margin-bottom: 0;
 }
+
+/* Connector between steps on wide screens */
+@media (min-width: 1024px) {
+  .step-card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 56px;
+    right: -18px;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid var(--color-gold);
+    border-right: 2px solid var(--color-gold);
+    transform: rotate(45deg);
+    opacity: 0.55;
+  }
+}
+
+/* Scroll reveal (class added by script.js only when JS + IntersectionObserver run,
+   so content stays visible with no-JS). Uses @keyframes rather than `transition`
+   so it doesn't clobber the hover transition already declared on .step-card. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal.is-visible {
+  animation: reveal-in 450ms ease forwards;
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.steps .step-card:nth-child(1) { animation-delay: 0ms; }
+.steps .step-card:nth-child(2) { animation-delay: 90ms; }
+.steps .step-card:nth-child(3) { animation-delay: 180ms; }
+.steps .step-card:nth-child(4) { animation-delay: 270ms; }
 
 /* ---------------- Benefits ---------------- */
 

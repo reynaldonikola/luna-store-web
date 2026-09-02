@@ -93,6 +93,31 @@
     });
   }
 
+  /* ---------------- Scroll reveal (proceso steps) ---------------- */
+  var stepCards = Array.prototype.slice.call(document.querySelectorAll(".steps .step-card"));
+
+  if (stepCards.length && "IntersectionObserver" in window) {
+    stepCards.forEach(function (card) {
+      card.classList.add("reveal");
+    });
+
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    stepCards.forEach(function (card) {
+      revealObserver.observe(card);
+    });
+  }
+
   /* ---------------- Footer year ---------------- */
   var yearEl = document.getElementById("current-year");
   if (yearEl) {
