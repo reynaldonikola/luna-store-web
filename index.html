@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Luna Store | Bisutería, accesorios e importaciones USA–Venezuela</title>
 <meta name="description" content="Luna Store (Maturín, Venezuela): bisutería, accesorios y fragancias originales, más de 7 años importando productos desde Estados Unidos a Venezuela con trato personalizado. Consulta disponibilidad por Instagram." />
-<meta name="theme-color" content="#1f4a5e" />
+<meta name="theme-color" content="#0a1920" />
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/web/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="assets/logo/web/favicon-192.png" />
@@ -49,8 +49,9 @@
     </nav>
 
     <div class="header-cta">
-      <a class="btn btn-secondary btn-small btn-secondary-desktop" href="https://www.instagram.com/lunastore_mat/" target="_blank" rel="noopener noreferrer">
-        Instagram
+      <a class="btn btn-primary btn-small" href="https://www.instagram.com/lunastore_mat/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+        <span>Instagram</span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú de navegación">
         <span></span>
@@ -66,7 +67,7 @@
     <div class="container hero-inner">
       <div class="hero-content">
         <span class="eyebrow">Maturín, Venezuela</span>
-        <h1>Bisutería, accesorios e importaciones desde Estados Unidos, con trato personalizado</h1>
+        <h1>Bisutería, accesorios e <em>importaciones</em> desde Estados Unidos, con trato personalizado</h1>
         <p>
           Más de 7 años ayudando a nuestros clientes a comprar en Amazon, Shein, Apple y otras tiendas
           de EE. UU., y a recibir sus pedidos en Venezuela sin complicaciones. Además, descubre nuestra
@@ -100,14 +101,19 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="false">
+      <div class="hero-visual" id="hero-visual" aria-hidden="false">
         <figure>
-          <img src="assets/web/pulseras-estilo-pandora-01.jpg" alt="Pulseras estilo Pandora personalizadas exhibidas para catálogo de Luna Store" loading="lazy" width="1215" height="2160" />
+          <img src="assets/web/pulseras-estilo-pandora-01.jpg" alt="Pulseras estilo Pandora personalizadas exhibidas para catálogo de Luna Store" loading="eager" fetchpriority="high" width="1215" height="2160" />
         </figure>
         <figure>
           <img src="assets/web/collar-fotograbado.jpg" alt="Collar con dije de fotograbado personalizado, uno de los productos de Luna Store" loading="lazy" width="640" height="1136" />
         </figure>
       </div>
+
+      <span class="scroll-cue" aria-hidden="true">
+        Descubre más
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+      </span>
     </div>
   </section>
 

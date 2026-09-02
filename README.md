@@ -7,8 +7,8 @@ Sitio estático de una sola página para **Luna Store** (`@lunastore_mat`), tien
 ```
 .
 ├── index.html        # Estructura y contenido del sitio
-├── styles.css        # Estilos (paleta derivada del logo, responsive)
-├── script.js         # Menú móvil, filtro de catálogo, acordeón FAQ, botón "volver arriba"
+├── styles.css        # Sistema visual premium, responsive y animaciones
+├── script.js         # Interacciones, filtros, FAQ, revelados y parallax sutil
 ├── assets/
 │   ├── logo/          # Logo original (PDF/AI) — sin modificar
 │   │   └── web/       # Logo exportado a PNG + favicons, listo para web
@@ -27,6 +27,9 @@ python3 -m http.server 8000
 ```
 
 ## Contenido y decisiones
+
+- **Inspiración visual**: adaptación original de la dirección pública y gratuita [Fragrance Maison de MotionSites](https://www.motionsites.org/prompts/fragrance-maison), usando sus principios declarados de lujo, cristal, contraste oscuro/claro, jerarquía editorial y movimiento sobrio. No se copió contenido bloqueado ni código propietario.
+- **Movimiento**: revelados progresivos al desplazarse, parallax muy sutil en el hero, transiciones del catálogo, estados luminosos en llamadas a la acción y navegación con efecto cristal. Todo se implementó con CSS y JavaScript nativo para mantener bajo el peso de la página.
 
 - **Datos**: toda la información (experiencia de 7+ años, servicios, categorías de producto, ubicación en Maturín) proviene de `BRIEF.md`. **No se inventaron** teléfonos, WhatsApp, precios, dirección exacta ni tiempos de entrega; esos puntos se dejan explícitamente como "consultar por Instagram" o "consultar disponibilidad".
 - **Contacto**: el único canal de contacto usado es Instagram (`https://www.instagram.com/lunastore_mat/`), presente en el header, hero, CTA final, FAQ y footer.

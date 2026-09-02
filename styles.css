@@ -1,29 +1,41 @@
 /* ============================================================
    Luna Store — hoja de estilos
+   Dirección: ultra-premium, mezcla dark / light / glass / luxury.
    Paleta derivada del logo: azul noche, blush rosado, dorado.
    ============================================================ */
 
 :root {
   --color-navy: #1f4a5e;
   --color-navy-dark: #143241;
+  --color-navy-deep: #0a1920;
   --color-blush: #e3b39a;
   --color-blush-light: #f3ddce;
   --color-gold: #a9822c;
+  --color-gold-light: #dab878;
   --color-cream: #faf6f2;
   --color-cream-dark: #f1e8e0;
   --color-ink: #22303a;
   --color-white: #ffffff;
+
+  --glass-dark-bg: rgba(10, 25, 32, 0.68);
+  --glass-dark-bg-strong: rgba(8, 20, 26, 0.86);
+  --glass-dark-border: rgba(255, 255, 255, 0.12);
+  --glass-light-bg: rgba(255, 255, 255, 0.55);
+  --glass-light-border: rgba(255, 255, 255, 0.7);
 
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-body: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
 
   --radius-md: 14px;
   --radius-lg: 24px;
-  --shadow-soft: 0 12px 30px -14px rgba(20, 50, 65, 0.35);
-  --shadow-strong: 0 20px 45px -18px rgba(20, 50, 65, 0.45);
+  --radius-xl: 32px;
+  --shadow-soft: 0 12px 30px -14px rgba(10, 25, 32, 0.35);
+  --shadow-strong: 0 24px 60px -20px rgba(10, 25, 32, 0.5);
+  --shadow-gold: 0 14px 34px -12px rgba(169, 130, 44, 0.5);
   --transition: 220ms ease;
+  --transition-slow: 480ms cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  --container-width: 1180px;
+  --container-width: 1200px;
 }
 
 *,
@@ -74,7 +86,8 @@ h3,
 h4 {
   font-family: var(--font-display);
   color: var(--color-navy-dark);
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   margin: 0 0 0.6em;
 }
 
@@ -90,7 +103,7 @@ p {
 }
 
 .section {
-  padding: 88px 0;
+  padding: 108px 0;
 }
 
 .section--alt {
@@ -100,21 +113,31 @@ p {
 .section-heading {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 48px;
+  margin: 0 auto 56px;
 }
 
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 0.78rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-gold);
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
 }
 
 .section-heading h2 {
-  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
 }
 
 .section-heading p {
@@ -127,7 +150,7 @@ p {
   position: absolute;
   left: -999px;
   top: auto;
-  background: var(--color-navy);
+  background: var(--color-navy-deep);
   color: var(--color-white);
   padding: 12px 20px;
   border-radius: var(--radius-md);
@@ -158,7 +181,7 @@ select:focus-visible {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
-  padding: 14px 28px;
+  padding: 15px 30px;
   border-radius: 999px;
   border: 2px solid transparent;
   cursor: pointer;
@@ -172,14 +195,33 @@ select:focus-visible {
 }
 
 .btn-primary {
-  background: var(--color-navy);
-  color: var(--color-white);
-  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, var(--color-blush) 0%, var(--color-gold-light) 100%);
+  color: var(--color-navy-deep);
+  box-shadow: var(--shadow-gold);
+  isolation: isolate;
 }
 
-.btn-primary:hover {
-  background: var(--color-navy-dark);
-  box-shadow: var(--shadow-strong);
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.75), transparent 55%);
+  opacity: 0;
+  transition: opacity 320ms ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  box-shadow: 0 18px 40px -12px rgba(169, 130, 44, 0.65);
+}
+
+.btn-primary:hover::before,
+.btn-primary:focus-visible::before {
+  opacity: 1;
 }
 
 .btn-secondary {
@@ -196,12 +238,13 @@ select:focus-visible {
 .btn-outline-light {
   background: transparent;
   color: var(--color-white);
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 .btn-outline-light:hover {
-  background: var(--color-white);
-  color: var(--color-navy-dark);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
 }
 
 .btn-small {
@@ -215,15 +258,22 @@ select:focus-visible {
   flex-shrink: 0;
 }
 
-/* ---------------- Header ---------------- */
+/* ---------------- Header (glass, always dark) ---------------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 246, 242, 0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(31, 74, 94, 0.1);
+  background: var(--glass-dark-bg);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid var(--glass-dark-border);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.site-header.is-scrolled {
+  background: var(--glass-dark-bg-strong);
+  box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.6);
 }
 
 .header-inner {
@@ -240,7 +290,7 @@ select:focus-visible {
   gap: 10px;
   text-decoration: none;
   font-family: var(--font-display);
-  color: var(--color-navy-dark);
+  color: var(--color-white);
 }
 
 .brand img {
@@ -257,13 +307,14 @@ select:focus-visible {
 .brand-name {
   font-size: 1.25rem;
   font-weight: 700;
+  color: var(--color-white);
 }
 
 .brand-tag {
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-gold-light);
   font-family: var(--font-body);
   font-weight: 600;
 }
@@ -278,9 +329,15 @@ select:focus-visible {
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--color-ink);
+  color: rgba(255, 255, 255, 0.82);
   position: relative;
   padding: 6px 2px;
+  transition: color var(--transition);
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--color-white);
 }
 
 .main-nav a::after {
@@ -290,7 +347,7 @@ select:focus-visible {
   bottom: 0;
   width: 0;
   height: 2px;
-  background: var(--color-gold);
+  background: linear-gradient(90deg, var(--color-gold-light), var(--color-blush));
   transition: width var(--transition);
 }
 
@@ -308,7 +365,7 @@ select:focus-visible {
 .nav-toggle {
   display: none;
   background: transparent;
-  border: 2px solid var(--color-navy);
+  border: 2px solid rgba(255, 255, 255, 0.35);
   border-radius: 10px;
   padding: 8px;
   cursor: pointer;
@@ -321,7 +378,7 @@ select:focus-visible {
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--color-navy);
+  background: var(--color-white);
   position: relative;
   transition: transform var(--transition);
 }
@@ -340,8 +397,8 @@ select:focus-visible {
 
 .hero {
   position: relative;
-  padding: 90px 0 100px;
-  background: linear-gradient(160deg, var(--color-navy) 0%, var(--color-navy-dark) 60%, #0f2530 100%);
+  padding: 128px 0 148px;
+  background: linear-gradient(165deg, var(--color-navy-deep) 0%, var(--color-navy-dark) 55%, var(--color-navy) 100%);
   color: var(--color-white);
   overflow: hidden;
 }
@@ -350,8 +407,9 @@ select:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 85% 20%, rgba(227, 179, 154, 0.25), transparent 55%),
-    radial-gradient(circle at 10% 90%, rgba(169, 130, 44, 0.2), transparent 50%);
+  background: radial-gradient(circle at 85% 15%, rgba(227, 179, 154, 0.28), transparent 55%),
+    radial-gradient(circle at 8% 92%, rgba(169, 130, 44, 0.22), transparent 50%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%);
   pointer-events: none;
 }
 
@@ -369,13 +427,21 @@ select:focus-visible {
 
 .hero-content h1 {
   color: var(--color-white);
-  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-  margin-bottom: 20px;
+  font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+  margin-bottom: 22px;
+}
+
+.hero-content h1 em {
+  font-style: italic;
+  background: linear-gradient(120deg, var(--color-blush-light), var(--color-gold-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-content p {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.82);
   max-width: 520px;
 }
 
@@ -383,30 +449,33 @@ select:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 28px;
+  margin-top: 30px;
 }
 
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  gap: 14px;
+  margin-top: 44px;
 }
 
 .hero-badge {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-dark-border);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 14px 18px;
 }
 
 .hero-badge strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--color-blush-light);
 }
 
@@ -415,6 +484,7 @@ select:focus-visible {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  will-change: transform;
 }
 
 .hero-visual figure {
@@ -423,6 +493,7 @@ select:focus-visible {
   overflow: hidden;
   box-shadow: var(--shadow-strong);
   aspect-ratio: 3 / 4;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .hero-visual figure:nth-child(2) {
@@ -433,11 +504,44 @@ select:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 400ms ease;
+  transition: transform 500ms ease;
 }
 
 .hero-visual figure:hover img {
   transform: scale(1.06);
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.scroll-cue svg {
+  width: 16px;
+  height: 16px;
+  animation: cue-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes cue-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+@media (max-width: 880px) {
+  .scroll-cue {
+    display: none;
+  }
 }
 
 /* ---------------- Category chips (intro) ---------------- */
@@ -451,16 +555,17 @@ select:focus-visible {
 .category-card {
   background: var(--color-white);
   border-radius: var(--radius-lg);
-  padding: 28px 24px;
+  padding: 30px 24px;
   text-align: center;
   box-shadow: var(--shadow-soft);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition);
   border: 1px solid rgba(31, 74, 94, 0.06);
 }
 
 .category-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-strong);
+  border-color: rgba(169, 130, 44, 0.3);
 }
 
 .category-icon {
@@ -498,7 +603,7 @@ select:focus-visible {
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 44px;
 }
 
 .filter-btn {
@@ -510,7 +615,7 @@ select:focus-visible {
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition), color var(--transition);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 
 .filter-btn:hover {
@@ -520,6 +625,7 @@ select:focus-visible {
 .filter-btn[aria-pressed="true"] {
   background: var(--color-navy);
   color: var(--color-white);
+  transform: translateY(-1px);
 }
 
 .product-grid {
@@ -533,7 +639,8 @@ select:focus-visible {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
-  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow),
+    opacity 320ms ease, transform 320ms ease;
   display: flex;
   flex-direction: column;
 }
@@ -541,6 +648,12 @@ select:focus-visible {
 .product-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-strong);
+}
+
+.product-card.is-filtering-out {
+  opacity: 0;
+  transform: scale(0.94);
+  pointer-events: none;
 }
 
 .product-card.is-hidden {
@@ -558,7 +671,7 @@ select:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 400ms ease;
+  transition: transform 500ms ease;
 }
 
 .product-card:hover .product-media img {
@@ -569,7 +682,8 @@ select:focus-visible {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(31, 74, 94, 0.88);
+  background: var(--glass-dark-bg-strong);
+  backdrop-filter: blur(6px);
   color: var(--color-white);
   font-size: 0.72rem;
   letter-spacing: 0.05em;
@@ -634,7 +748,7 @@ select:focus-visible {
   border-radius: var(--radius-lg);
   padding: 32px 24px 24px;
   box-shadow: var(--shadow-soft);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
 }
 
 .step-card:hover {
@@ -649,8 +763,8 @@ select:focus-visible {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-gold);
-  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+  color: var(--color-navy-deep);
   font-family: var(--font-display);
   font-weight: 700;
   display: flex;
@@ -705,14 +819,14 @@ select:focus-visible {
 
 /* Scroll reveal (class added by script.js only when JS + IntersectionObserver run,
    so content stays visible with no-JS). Uses @keyframes rather than `transition`
-   so it doesn't clobber the hover transition already declared on .step-card. */
+   so it doesn't clobber the hover transition already declared on cards. */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(20px);
 }
 
 .reveal.is-visible {
-  animation: reveal-in 450ms ease forwards;
+  animation: reveal-in 620ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 @keyframes reveal-in {
@@ -721,11 +835,6 @@ select:focus-visible {
     transform: translateY(0);
   }
 }
-
-.steps .step-card:nth-child(1) { animation-delay: 0ms; }
-.steps .step-card:nth-child(2) { animation-delay: 90ms; }
-.steps .step-card:nth-child(3) { animation-delay: 180ms; }
-.steps .step-card:nth-child(4) { animation-delay: 270ms; }
 
 /* ---------------- Benefits ---------------- */
 
@@ -742,6 +851,12 @@ select:focus-visible {
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
 }
 
 .benefit-icon {
@@ -775,14 +890,25 @@ select:focus-visible {
 /* ---------------- Experience banner ---------------- */
 
 .experience {
-  background: linear-gradient(135deg, var(--color-navy-dark), var(--color-navy));
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-navy-deep), var(--color-navy));
   color: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: 56px 40px;
+  border-radius: var(--radius-xl);
+  padding: 60px 44px;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 32px;
   align-items: center;
+  border: 1px solid var(--glass-dark-border);
+}
+
+.experience::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 90% 10%, rgba(227, 179, 154, 0.18), transparent 55%);
+  pointer-events: none;
 }
 
 .experience h2 {
@@ -804,7 +930,10 @@ select:focus-visible {
 .experience-figure .big-number {
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 4.5rem);
-  color: var(--color-blush-light);
+  background: linear-gradient(120deg, var(--color-blush-light), var(--color-gold-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   line-height: 1;
 }
 
@@ -832,6 +961,12 @@ select:focus-visible {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
+  border: 1px solid transparent;
+  transition: border-color var(--transition);
+}
+
+.faq-item.is-open {
+  border-color: rgba(169, 130, 44, 0.25);
 }
 
 .faq-question {
@@ -855,6 +990,7 @@ select:focus-visible {
   flex-shrink: 0;
   width: 22px;
   height: 22px;
+  color: var(--color-gold);
   transition: transform var(--transition);
 }
 
@@ -865,7 +1001,7 @@ select:focus-visible {
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 280ms ease, padding var(--transition);
+  transition: max-height 320ms ease, padding var(--transition);
   padding: 0 24px;
 }
 
@@ -875,17 +1011,24 @@ select:focus-visible {
   margin-bottom: 20px;
 }
 
-.faq-item.is-open .faq-answer {
-  max-height: 400px;
-}
-
 /* ---------------- Final CTA ---------------- */
 
 .final-cta {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--color-blush), var(--color-blush-light));
-  border-radius: var(--radius-lg);
-  padding: 56px 40px;
+  border-radius: var(--radius-xl);
+  padding: 60px 40px;
   text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.5), transparent 55%);
+  pointer-events: none;
 }
 
 .final-cta h2 {
@@ -908,9 +1051,20 @@ select:focus-visible {
 /* ---------------- Footer ---------------- */
 
 .site-footer {
-  background: var(--color-navy-dark);
+  position: relative;
+  background: var(--color-navy-deep);
   color: rgba(255, 255, 255, 0.8);
   padding: 56px 0 28px;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-light), transparent);
 }
 
 .footer-grid {
@@ -962,7 +1116,7 @@ select:focus-visible {
 }
 
 .footer-col a:hover {
-  color: var(--color-blush-light);
+  color: var(--color-gold-light);
 }
 
 .footer-note {
@@ -991,9 +1145,10 @@ select:focus-visible {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--color-navy);
+  background: var(--glass-dark-bg-strong);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-dark-border);
   color: var(--color-white);
-  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1010,6 +1165,10 @@ select:focus-visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--color-navy-deep);
 }
 
 .back-to-top svg {
@@ -1056,22 +1215,19 @@ select:focus-visible {
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--color-cream);
+    background: var(--glass-dark-bg-strong);
+    backdrop-filter: blur(18px);
     flex-direction: column;
     align-items: flex-start;
     padding: 20px 24px;
     gap: 16px;
-    border-bottom: 1px solid rgba(31, 74, 94, 0.1);
+    border-bottom: 1px solid var(--glass-dark-border);
     box-shadow: var(--shadow-soft);
     display: none;
   }
 
   .main-nav.is-open {
     display: flex;
-  }
-
-  .header-cta .btn-secondary-desktop {
-    display: none;
   }
 
   .footer-grid {
@@ -1081,11 +1237,11 @@ select:focus-visible {
 
 @media (max-width: 600px) {
   .section {
-    padding: 64px 0;
+    padding: 72px 0;
   }
 
   .hero {
-    padding: 64px 0 72px;
+    padding: 72px 0 84px;
   }
 
   .experience,
@@ -1094,6 +1250,20 @@ select:focus-visible {
   }
 
   .hero-badges {
-    gap: 18px;
+    gap: 12px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-cta .btn span {
+    display: none;
+  }
+
+  .header-cta .btn {
+    padding: 10px 14px;
   }
 }
