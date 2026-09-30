@@ -6,3 +6,6 @@ BRIEF.md
 
 # Archivos del sistema
 .DS_Store
+
+# Dependencias
+node_modules

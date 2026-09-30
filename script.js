@@ -37,6 +37,14 @@
   var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".filter-btn"));
   var productCards = Array.prototype.slice.call(document.querySelectorAll(".product-card"));
   var noResults = document.getElementById("no-results");
+  var hideTimers = new Map();
+
+  function cancelPendingHide(card) {
+    if (hideTimers.has(card)) {
+      window.clearTimeout(hideTimers.get(card));
+      hideTimers.delete(card);
+    }
+  }
 
   function applyFilter(category) {
     var visibleCount = 0;
@@ -45,7 +53,8 @@
 
     productCards.forEach(function (card) {
       var matches = category === "all" || card.getAttribute("data-category") === category;
-      var isHidden = card.classList.contains("is-hidden");
+      // A card still fading out counts as hidden so a quick filter change brings it back.
+      var isHidden = card.classList.contains("is-hidden") || card.classList.contains("is-filtering-out");
 
       if (matches) {
         visibleCount += 1;
@@ -62,16 +71,22 @@
         card.classList.add("is-hidden");
       });
       toShow.forEach(function (card) {
-        card.classList.remove("is-hidden");
+        cancelPendingHide(card);
+        card.classList.remove("is-hidden", "is-filtering-out");
       });
     } else {
       toHide.forEach(function (card) {
         card.classList.add("is-filtering-out");
-        window.setTimeout(function () {
-          card.classList.add("is-hidden");
-        }, 260);
+        hideTimers.set(
+          card,
+          window.setTimeout(function () {
+            hideTimers.delete(card);
+            card.classList.add("is-hidden");
+          }, 260)
+        );
       });
       toShow.forEach(function (card) {
+        cancelPendingHide(card);
         card.classList.remove("is-hidden");
         // Force reflow so the removal of is-filtering-out transitions in.
         void card.offsetWidth;
@@ -180,6 +195,16 @@
     );
 
     revealTargets.forEach(function (el) {
+      // Once revealed, drop the animation so its `forwards` fill stops pinning
+      // opacity/transform and hover lifts + filter fades work again.
+      el.addEventListener("animationend", function onRevealEnd(event) {
+        if (event.target !== el || event.animationName !== "reveal-in") {
+          return;
+        }
+        el.removeEventListener("animationend", onRevealEnd);
+        el.classList.remove("reveal", "is-visible");
+        el.style.animationDelay = "";
+      });
       revealObserver.observe(el);
     });
   }

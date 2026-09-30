@@ -26,6 +26,15 @@ python3 -m http.server 8000
 # luego visitar http://localhost:8000
 ```
 
+## Pruebas
+
+Pruebas de regresión en `tests/` (Node + Playwright/Chromium): filtros del catálogo, animaciones de revelado, menú móvil, FAQ, desbordamiento horizontal y enlaces internos.
+
+```bash
+npm install
+npm test
+```
+
 ## Contenido y decisiones
 
 - **Inspiración visual**: adaptación original de la dirección pública y gratuita [Fragrance Maison de MotionSites](https://www.motionsites.org/prompts/fragrance-maison), usando sus principios declarados de lujo, cristal, contraste oscuro/claro, jerarquía editorial y movimiento sobrio. No se copió contenido bloqueado ni código propietario.
@@ -51,7 +60,7 @@ python3 -m http.server 8000
 
 ## Responsive
 
-Diseño mobile-first con puntos de quiebre en `styles.css` (`960px`, `880px`, `760px`, `600px`): navegación colapsa a menú hamburguesa, la cuadrícula de productos y beneficios se reacomoda en columnas, y el bloque de experiencia/CTA se apila verticalmente en pantallas pequeñas.
+Diseño mobile-first con puntos de quiebre en `styles.css` (`960px`, `880px`, `760px`, `600px`): la navegación colapsa a menú hamburguesa por debajo de `960px`, la cuadrícula de productos y beneficios se reacomoda en columnas, y el bloque de experiencia/CTA se apila verticalmente en pantallas pequeñas.
 
 ## Enlaces verificados
 
