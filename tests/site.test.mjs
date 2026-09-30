@@ -99,7 +99,10 @@ test("revealed cards keep hover lift and filter fade", async () => {
       new Promise((resolve) => {
         let min = 1;
         const start = performance.now();
-        document.querySelector('[data-filter="fragancias"]').click();
+        const other = [...document.querySelectorAll(".filter-btn")].find(
+          (b) => b.dataset.filter !== "all" && b.dataset.filter !== el.dataset.category,
+        );
+        other.click();
         (function sample() {
           min = Math.min(min, Number(getComputedStyle(el).opacity));
           if (performance.now() - start < 250) requestAnimationFrame(sample);
